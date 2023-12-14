@@ -1,0 +1,83 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.header {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    color: #fff;
+    background-color: #aaa;
+    z-index: 1000; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #aaa;
+    text-align: center;
+}
+
+.cart-button {
+    padding: 10px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cart-button img {
+    width: 30px;
+    height: auto;
+}
+
+.back-button {
+    text-decoration: none;
+    color: #000;
+    padding: 10px;
+    display: inline-block;
+}
+
+.product-detail {
+    text-align: center;
+    padding: 20px;
+    padding-top: 30%;
+}
+
+.quantity-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.quantity-btn {
+    border: 1px solid #000;
+    padding: 5px 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.quantity-selector input {
+    text-align: center;
+    width: 50px;
+    margin: 0 10px;
+}
+
+.purchase-btn {
+    background-color: #0000ff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+}
+
+.purchase-btn:hover {
+    background-color: #00008b;
+}

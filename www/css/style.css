@@ -1,62 +1,65 @@
 body, html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
 }
 
-.app-container {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: space-between;
-}
+/* 他のスタイルの定義とともに */
 
-.app-header, .app-footer {
-    background-color: #FFD700;
-    padding: 10px;
+.header {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    color: #fff;
+    background-color: #aaa;
+    z-index: 1000; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
-.main-content {
+.product-list {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: space-around; 
+    padding: 2%;
+    padding-top: 100px;
 }
 
-.image-container {
-    width: 80%;
-    background-color: #f0f0f0; 
-    margin: 20px 0;
-    height: 50vh; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.product {
+    width: 45%; /* 2列レイアウトのための幅指定 */
+    margin-bottom: 10px;
+    background-color: #eaeaea;
+    border: 1px solid #aaa;
+    text-align: center;
+    cursor: pointer;
 }
 
-.image-container img {
-    max-width: 100%;
-    max-height: 100%;
+.product img {
+    width: 100%;
+    height: auto;
 }
 
-.btn-action, .btn-footer {
+.product-info {
+    padding: 5px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #aaa;
+    text-align: center;
+}
+
+.cart-button {
+    padding: 10px;
     border: none;
-    padding: 10px 20px;
-    margin: 10px;
-    border-radius: 5px;
-    background-color: #808080;
-    color: white;
-    font-size: 16px;
+    background-color: transparent;
+    cursor: pointer;
 }
 
-.btn-action:hover, .btn-footer:hover {
-    background-color: #696969; 
-}
-
-
-@media (max-width: 768px) {
-    .image-container {
-        width: 95%;
-    }
+.cart-button img {
+    width: 30px;
+    height: auto;
 }
