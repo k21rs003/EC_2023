@@ -14,17 +14,24 @@
     <script>
         let ncmb = new NCMB(appKey, clientKey);
         let UTdata = ncmb.DataStore("Cart");
-        let key = "quantity";
+        // let key = "quantity";
 
         function enterData() {
             let uTdata = new UTdata();
-            let value = parseInt($("#quantity").val());
-            uTdata.set(key, value)
-                .save()
+            let productName = document.getElementById('productName').textContent; // テキスト内容の取得
+            let quantity = parseInt(document.getElementById('quantity').value);
+            let unitPriceElement = document.getElementById('unitPrice');
+            let unitPriceValue = unitPriceElement.getAttribute('value'); // カスタム属性の値の取得
+
+            uTdata.set("productName", productName);
+            uTdata.set("quantity", quantity);
+            uTdata.set("unitPrice", parseInt(unitPriceValue));
+            uTdata.set("subtotal", parseInt(unitPriceValue) * quantity);
+                uTdata.save()
                 .then(function(results) {
-                    $("#display").removeClass();
-                    $("#display").addClass("bg-success");
-                    $("#display").html("enter success");
+                    let productName = document.getElementById('productName').value;
+                    let quantity = document.getElementById('quantity').value;
+                    alert('購入する数量: ' + quantity);
                 })
                 .catch(function(results) {
                     $("#display").removeClass();
@@ -47,8 +54,8 @@
             <img src="img/TwilightStarberries.png" alt="商品画像" style="width: 80%; height: 40%;">
         </div>
         <div class="product-info">
-            <h2 id="productName">Twilight Starberries</h2>
-            <p>¥310</p>
+            <h2 id="productName" value="Twilight Starberries">Twilight Starberries</h2>
+            <p id="unitPrice" value="310">¥310</p>
         </div>
         <div class="quantity-selector">
             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
