@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MystiCo - 商品詳細</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
     <link rel="stylesheet" href="css/pro-detail.css">
+    <script src="keys.js"></script>
+    <title>MystiCo - 商品詳細</title>
+    <script src="script.js"></script>
+
+    <script>
+        let ncmb = new NCMB(appKey, clientKey);
+        let UTdata = ncmb.DataStore("Cart");
+        let key = "quantity";
+
+        function enterData() {
+            let uTdata = new UTdata();
+            let value = parseInt($("#quantity").val());
+            uTdata.set(key, value)
+                .save()
+                .then(function(results) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-success");
+                    $("#display").html("enter success");
+                })
+                .catch(function(results) {
+                    $("#display").removeClass();
+                    $("#display").addClass("bg-warning");
+                    $("#display").html("enter fail");
+                })
+        }
+    </script>
+        
 </head>
 <body>
     <header class="header">
@@ -12,29 +41,27 @@
     </header>
 
     <div class="product-detail">
-        <a href="index.html"  class="back-button">＜ 戻る</a>
+        <a href="index.html" class="back-button">＜ 戻る</a>
         <div class="image-container">
             <!-- 商品画像 -->
-            <img src="img/TwilightStarberries.png" alt="商品画像" style="width: 80%; height:40%;">
+            <img src="img/TwilightStarberries.png" alt="商品画像" style="width: 80%; height: 40%;">
         </div>
         <div class="product-info">
-            <h2>Twilight Starberries</h2>
-            <p>¥210</p>
+            <h2 id="productName">Twilight Starberries</h2>
+            <p>¥310</p>
         </div>
         <div class="quantity-selector">
             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
             <input type="number" id="quantity" value="1">
             <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
         </div>
-        <button class="purchase-btn">購入する</button>
+        <button onclick="enterData()" class="purchase-btn">購入する</button>
     </div>
 
     <footer class="footer">
-        <button class="cart-button">
+        <button onclick="location.href='cart.html'" class="cart-button">
             <img src="cart-icon.png" alt="カート">
         </button>
     </footer>
-
-    <script src="script.js"></script>
 </body>
 </html>

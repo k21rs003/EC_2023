@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <script src="components/loader.js"></script>
+    <script src="keys.js"></script>
+    <script src="ncmb.min.js"></script>
+    <title>MystiCo - カート</title>
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="back-button">＜ 戻る</a>
+        <h1>MystiCo</h1>
+    </header>
+
+    <div class="cart-container">
+        <table id="cart-table">
+            <thead>
+                <tr>
+                    <th>商品名</th>
+                    <th>数量</th>
+                    <th>小計金額</th>
+                    <th>削除</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 商品の行はJavaScriptで追加 -->
+            </tbody>
+        </table>
+        <div class="total-container">
+            <span>合計金額: </span>
+            <span id="total-price">¥0</span>
+        </div>
+        <button class="purchase-btn">購入する</button>
+    </div>
+
+    <footer class="footer">
+        <!-- フッターコンテンツ -->
+    </footer>
+
+    <script>
+        let ncmb = new NCMB(appKey, clientKey); // Initialize NIFCLOUD
+        let Cart = ncmb.DataStore("Cart");
+
+        function fetchCartItems() {
+            Cart.fetchAll()
+                .then(function(results){
+                    let table = document.getElementById('cart-table');
+                    table.innerHTML = ''; // Clear the table first
+                    let total = 0;
+                    results.forEach(function(item){
+                        let row = table.insertRow();
+                        row.insertCell().textContent = item.get("productName");
+                        row.insertCell().textContent = item.get("quantity");
+                        let subtotal = item.get("subtotal");
+                        row.insertCell().textContent = '¥' + subtotal;
+                        total += subtotal;
+
+                        // Add delete button
+                        let deleteCell = row.insertCell();
+                        let deleteButton = document.createElement('button');
+                        deleteButton.textContent = '🗑';
+                        deleteButton.onclick = function(){
+                            // Delete this item
+                            item.delete()
+                                .then(function(){
+                                    // Refresh the cart items
+                                    fetchCartItems();
+                                })
+                                .catch(function(err){
+                                    alert('Failed to delete item: ' + err);
+                                });
+                        };
+                        deleteCell.appendChild(deleteButton);
+                    });
+                    // Display total
+                    let totalRow = table.insertRow();
+                    totalRow.insertCell().textContent = 'Total';
+                    totalRow.insertCell().setAttribute('colspan', '2');
+                    totalRow.insertCell().textContent = '¥' + total;
+                })
+                .catch(function(err){
+                    alert('Failed to fetch cart items: ' + err);
+                });
+        }
+
+        // Load cart items when page is loaded
+        document.addEventListener('DOMContentLoaded', fetchCartItems);
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
