@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <script src="../components/loader.js"></script>
+    <link rel="stylesheet" href="../components/loader.css">
+    <link rel="stylesheet" href="../css/pro-detail.css">
+    <script src="../keys.js"></script>
+    <title>MystiCo - 商品詳細</title>
+    <script src="../script.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+    <header class="header">
+        <h1>MystiCo</h1>
+    </header>
+
+    <div class="product-detail">
+        <a href="../index.html" class="back-button">＜ 戻る</a>
+        <div class="image-container">
+            <!-- 商品画像 -->
+            <img src="../img/MoonlightIceCream.png" alt="商品画像" style="width: 80%; height: 40%;">
+        </div>
+        <div class="product-info">
+            <h2 id="productName" value="Moonlight Ice Cream">Moonlight Ice Cream</h2>
+            <p id="unitPrice" value="710">¥710</p>
+        </div>
+        <div class="quantity-selector">
+            <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
+            <input type="number" id="quantity" value="1">
+            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+        </div>
+        <button onclick="enterData()" class="purchase-btn">カートに入れる</button>
+    </div>
+
+    <footer class="footer">
+        <button onclick="location.href='../cart.html'" class="cart-button">
+            <img src="../img/cart-icon.png" alt="カート">
+        </button>
+    </footer>
+    <script src="../event.js"></script>
+</body>
+</html>
