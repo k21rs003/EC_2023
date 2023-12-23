@@ -4,8 +4,6 @@ body, html {
     font-family: 'Arial', sans-serif;
 }
 
-/* 他のスタイルの定義とともに */
-
 .header {
     position: fixed; 
     top: 0; 

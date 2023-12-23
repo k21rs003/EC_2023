@@ -1,12 +1,27 @@
-/* 以前のスタイルに加えて */
+.header {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
 
 .cart-container {
-    padding: 20px;
+    padding: 100px 20px 20px 20px;
 }
 
 #cart-table {
     width: 100%;
     margin-bottom: 20px;
+}
+
+#cart-table th {
+    background-color: #f5f5f5; /* 背景色を明るい灰色に設定 */
+    color: #333; /* テキスト色を濃い灰色に設定 */
+    font-weight: bold; /* フォントを太字に設定 */
 }
 
 #cart-table th, #cart-table td {
@@ -33,7 +48,3 @@
 .purchase-btn:hover {
     background-color: #00008b;
 }
-
-/* フッタースタイルも必要に応じて */
-
-

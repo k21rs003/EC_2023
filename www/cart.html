@@ -12,11 +12,11 @@
 </head>
 <body>
     <header class="header">
-        <a href="index.html" class="back-button">＜ 戻る</a>
         <h1>MystiCo</h1>
     </header>
 
     <div class="cart-container">
+        <a href="index.html" class="back-button">＜ Home</a>
         <table id="cart-table">
             <thead>
                 <tr>
@@ -42,46 +42,49 @@
         let Cart = ncmb.DataStore("Cart");
 
         function fetchCartItems() {
-            Cart.fetchAll()
-                .then(function(results){
-                    let table = document.getElementById('cart-table');
-                    table.innerHTML = ''; // Clear the table first
-                    let total = 0;
-                    results.forEach(function(item){
-                        let row = table.insertRow();
-                        row.insertCell().textContent = item.get("productName");
-                        row.insertCell().textContent = item.get("quantity");
-                        let subtotal = item.get("subtotal");
-                        row.insertCell().textContent = '¥' + subtotal;
-                        total += subtotal;
+    Cart.fetchAll()
+        .then(function(results){
+            let table = document.getElementById('cart-table');
+            let tbody = table.getElementsByTagName('tbody')[0]; // tbody要素を取得
+            tbody.innerHTML = ''; // Clear the tbody content
 
-                        // Add delete button
-                        let deleteCell = row.insertCell();
-                        let deleteButton = document.createElement('button');
-                        deleteButton.textContent = '🗑';
-                        deleteButton.onclick = function(){
-                            // Delete this item
-                            item.delete()
-                                .then(function(){
-                                    // Refresh the cart items
-                                    fetchCartItems();
-                                })
-                                .catch(function(err){
-                                    alert('Failed to delete item: ' + err);
-                                });
-                        };
-                        deleteCell.appendChild(deleteButton);
-                    });
-                    // Display total
-                    let totalRow = table.insertRow();
-                    totalRow.insertCell().textContent = '合計金額';
-                    totalRow.insertCell().setAttribute('colspan', '2');
-                    totalRow.insertCell().textContent = '¥' + total;
-                })
-                .catch(function(err){
-                    alert('Failed to fetch cart items: ' + err);
-                });
-        }
+            let total = 0;
+            results.forEach(function(item){
+                let row = tbody.insertRow();
+                row.insertCell().textContent = item.get("productName");
+                row.insertCell().textContent = item.get("quantity");
+                let subtotal = item.get("subtotal");
+                row.insertCell().textContent = '¥' + subtotal;
+                total += subtotal;
+
+                // Add delete button
+                let deleteCell = row.insertCell();
+                let deleteButton = document.createElement('button');
+                deleteButton.textContent = '🗑';
+                deleteButton.onclick = function(){
+                    // Delete this item
+                    item.delete()
+                        .then(function(){
+                            // Refresh the cart items
+                            fetchCartItems();
+                        })
+                        .catch(function(err){
+                            alert('Failed to delete item: ' + err);
+                        });
+                };
+                deleteCell.appendChild(deleteButton);
+            });
+            // Display total
+            let totalRow = tbody.insertRow();
+            totalRow.insertCell().textContent = '合計金額';
+            totalRow.insertCell().setAttribute('colspan', '2');
+            totalRow.insertCell().textContent = '¥' + total;
+        })
+        .catch(function(err){
+            alert('Failed to fetch cart items: ' + err);
+        });
+}
+
 
         // Load cart items when page is loaded
         document.addEventListener('DOMContentLoaded', fetchCartItems);
