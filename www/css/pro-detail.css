@@ -45,8 +45,7 @@ body, html {
 
 .product-detail {
     text-align: center;
-    padding: 20px;
-    padding-top: 30%;
+    padding: 30% 20px;
 }
 
 .quantity-selector {
